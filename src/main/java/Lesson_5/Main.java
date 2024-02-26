@@ -10,15 +10,14 @@ public class Main {
         Dog dog2 = new Dog("Харди");
         Dog dog3 = new Dog("Викинг");
         Dog dog4 = new Dog("Батлер");
-        cat1.Run(150);
-        cat2.Run(300);
-        cat3.Swim(150);
-        cat4.Swim(10);
-        dog1.Run(150);
-        dog2.Run(666);
-        dog3.Swim(5);
-        dog4.Swim(15);
-
+        cat1.run(150);
+        cat2.run(300);
+        cat3.swim(150);
+        cat4.swim(10);
+        dog1.run(150);
+        dog2.run(666);
+        dog3.swim(5);
+        dog4.swim(15);
         Cat[] catsArray = new Cat[4];
         catsArray[0] = cat1;
         catsArray[1] = cat2;
@@ -29,47 +28,47 @@ public class Main {
 
         for (int i = 0; i < catsArray.length; i++) {
             if (catsArray[i].isFull()) {
-                catsArray[i].CatInfo();
+                System.out.println(catsArray[i].toString());
             } else {
                 if ((foodBowl.getCountOffoodinBowl() - catsArray[i].getHunger()) >= 0) {
                     catsArray[i].setFull(true);
-                    catsArray[i].CatInfo();
+                    System.out.println(catsArray[i].toString());
                     foodBowl.setCountOffoodinBowl(foodBowl.getCountOffoodinBowl() - catsArray[i].getHunger());
                 } else {
-                    catsArray[i].CatInfo();
+                    System.out.println(catsArray[i].toString());
                 }
             }
 
         }
 
-        foodBowl.FoodBowlInfo();
-        foodBowl.AddFoodInBowl(30);
-        foodBowl.FoodBowlInfo();
+        System.out.println(foodBowl.toString());
+        foodBowl.addFoodInBowl(30);
+        System.out.println(foodBowl.toString());
 
         for (int i = 0; i < catsArray.length; i++) {
             if (catsArray[i].isFull()) {
-                catsArray[i].CatInfo();
+                System.out.println(catsArray[i].toString());
             } else {
                 if ((foodBowl.getCountOffoodinBowl() - catsArray[i].getHunger()) >= 0) {
                     catsArray[i].setFull(true);
-                    catsArray[i].CatInfo();
+                    System.out.println(catsArray[i].toString());
                     foodBowl.setCountOffoodinBowl(foodBowl.getCountOffoodinBowl() - catsArray[i].getHunger());
                 } else {
-                    catsArray[i].CatInfo();
+                    System.out.println(catsArray[i].toString());
                 }
             }
 
         }
 
         NumberOfAnimals numberOfAnimals = new NumberOfAnimals();
-        numberOfAnimals.ShowNumberOfAnimals();
+        System.out.println(numberOfAnimals.toString());
 
         Triangle triangle = new Triangle("black", "Red", 5, 6, 8);
         Rectangle rectangle = new Rectangle("black", "Red", 5, 6);
         Circle circle = new Circle("black", "Red", 2);
-        triangle.Info();
-        rectangle.Info();
-        circle.Info();
+        System.out.println(triangle.toString());
+        System.out.println(rectangle.toString());
+        System.out.println(circle.toString());
     }
 
 

@@ -11,13 +11,12 @@ public class Circle implements AreaAndPerimeter {
         this.colorFill = colorFill;
         this.colorOutline = colorOutline;
         this.radius = radius;
-        this.area = AreaOfTheCircle(radius);
-        this.perimeter = PerimeterOfTheCircle(radius);
+        this.area = areaOfTheCircle(radius);
+        this.perimeter = perimeterOfTheCircle(radius);
     }
 
     @Override
-    public void Info() {
-        String str = String.format("Площадь круга = %.2f, периметр круга = %.2f, цвет фона: %s, цвет границ: %s", area, perimeter, colorFill, colorOutline);
-        System.out.println(str);
+    public String toString() {
+        return String.format("Площадь треугольника = %.2f, периметр треугольника = %.2f, цвет фона: %s, цвет границ: %s", area, perimeter, colorFill, colorOutline);
     }
 }

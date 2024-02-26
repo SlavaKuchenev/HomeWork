@@ -13,14 +13,13 @@ public class Rectangle implements AreaAndPerimeter {
         this.colorOutline = colorOutline;
         this.height = height;
         this.wide = wide;
-        this.area = AreaOfTheRectangle(height, wide);
-        this.perimeter = PerimeterOfTheRectangle(height, wide);
+        this.area = areaOfTheRectangle(height, wide);
+        this.perimeter = perimeterOfTheRectangle(height, wide);
     }
 
     @Override
-    public void Info() {
-
-        String str = String.format("Площадь прямоугольника = %.2f, периметр прямоугольника = %.2f, цвет фона: %s, цвет границ: %s", area, perimeter, colorFill, colorOutline);
-        System.out.println(str);
+    public String toString() {
+        return String.format("Площадь треугольника = %.2f, периметр треугольника = %.2f, цвет фона: %s, цвет границ: %s", area, perimeter, colorFill, colorOutline);
     }
+
 }

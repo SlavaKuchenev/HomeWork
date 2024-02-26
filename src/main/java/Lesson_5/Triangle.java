@@ -17,8 +17,8 @@ public class Triangle implements AreaAndPerimeter {
         this.side3 = side3;
 
         if ((side1 + side2) > side3 && (side1 + side3) > side2 && (side3 + side2) > side1) {
-            this.area = AreaOfTheTriangle(side1, side2, side3);
-            this.perimeter = PerimeterOfTheTriangle(side1, side2, side3);
+            this.area = areaOfTheTriangle(side1, side2, side3);
+            this.perimeter = perimeterOfTheTriangle(side1, side2, side3);
         } else {
             System.out.println("Треугольника не существует");
             this.area = 0;
@@ -26,14 +26,7 @@ public class Triangle implements AreaAndPerimeter {
     }
 
     @Override
-    public void Info() {
-        if (area == 0) {
-            System.out.println("Треугольника не существует");
-        } else {
-            String str = String.format("Площадь треугольника = %.2f, периметр треугольника = %.2f, цвет фона: %s, цвет границ: %s", area, perimeter, colorFill, colorOutline);
-            System.out.println(str);
-        }
+    public String toString() {
+        return String.format("Площадь треугольника = %.2f, периметр треугольника = %.2f, цвет фона: %s, цвет границ: %s", area, perimeter, colorFill, colorOutline);
     }
-
-
 }

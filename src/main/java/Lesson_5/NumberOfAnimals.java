@@ -33,7 +33,10 @@ public class NumberOfAnimals {
         NumberOfAnimals.numberOfAnimals = numberOfAnimals;
     }
 
-    public void ShowNumberOfAnimals() {
-        System.out.println("Количество животных: " + numberOfAnimals + ", количество собак: " + numberOfDogs + ", количество котов: " + numberOfCats);
+    @Override
+    public String toString() {
+        return "Количество животных: " + numberOfAnimals +
+                ", количество собак: " + numberOfDogs +
+                ", количество котов: " + numberOfCats;
     }
 }

@@ -15,12 +15,8 @@ public class Cat extends Animal {
         this.full = false;
     }
 
-    public void CatInfo() {
-        System.out.println("Кот " + this.name + " сытый - " + full);
-    }
-
     @Override
-    public void Run(int distans) {
+    public void run(int distans) {
         if (distans <= 200 && distans >= 0) {
             System.out.println("Кот " + this.name + " пробежал " + distans+" метров.");
         } else {
@@ -29,17 +25,13 @@ public class Cat extends Animal {
     }
 
     @Override
-    public void Swim(int distans) {
+    public void swim(int distans) {
 
         System.out.println("Кот " + this.name + " не может плавать.");
     }
 
     public int getHunger() {
         return hunger;
-    }
-
-    public void setHunger(int hunger) {
-        this.hunger = hunger;
     }
 
     public boolean isFull() {
@@ -50,7 +42,11 @@ public class Cat extends Animal {
         this.full = full;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public String toString() {
+        return "Кот " +
+                  name  +
+                " сытый - " + full ;
     }
 }
+

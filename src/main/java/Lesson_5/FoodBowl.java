@@ -7,9 +7,9 @@ public class FoodBowl {
         this.countOffoodInBowl = countOffoodinBowl;
     }
 
-    public void AddFoodInBowl(int food) {
+    public void addFoodInBowl(int food) {
         this.countOffoodInBowl = countOffoodInBowl + food;
-        System.out.println("Добавили еды");
+        System.out.println("Добавили "+food+" еды");
     }
 
     public int getCountOffoodinBowl() {
@@ -20,7 +20,9 @@ public class FoodBowl {
         this.countOffoodInBowl = countOffoodinBowl;
     }
 
-    public void FoodBowlInfo() {
-        System.out.println("Количество еды: " + countOffoodInBowl);
+    @Override
+    public String toString() {
+        return "Количество еды: " +
+                countOffoodInBowl ;
     }
 }

@@ -9,11 +9,11 @@ public class Animal {
         setNumberOfAnimals(getNumberOfAnimals() + 1);
     }
 
-    public void Run(int distans) {
+    public void run(int distans) {
         System.out.println("Животное пробежало: " + distans+" метров.");
     }
 
-    public void Swim(int distans) {
+    public void swim(int distans) {
         System.out.println("Животное пробежало: " + distans+" метров.");
     }
 
