@@ -15,7 +15,6 @@ public class Triangle implements AreaAndPerimeter {
             this.perimeter = perimeterOfTheTriangle(side1, side2, side3);
         } else {
             System.out.println("Треугольника не существует");
-            this.area = 0;
         }
     }
 
