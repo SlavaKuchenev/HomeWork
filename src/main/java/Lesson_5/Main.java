@@ -26,16 +26,16 @@ public class Main {
 
         FoodBowl foodBowl = new FoodBowl(40);
 
-        for (int i = 0; i < catsArray.length; i++) {
-            if (catsArray[i].isFull()) {
-                System.out.println(catsArray[i].toString());
+        for (Cat cat : catsArray) {
+            if (cat.isFull()) {
+                System.out.println(cat.toString());
             } else {
-                if ((foodBowl.getCountOffoodinBowl() - catsArray[i].getHunger()) >= 0) {
-                    catsArray[i].setFull(true);
-                    System.out.println(catsArray[i].toString());
-                    foodBowl.setCountOffoodinBowl(foodBowl.getCountOffoodinBowl() - catsArray[i].getHunger());
+                if ((foodBowl.getCountOffoodinBowl() - cat.getHunger()) >= 0) {
+                    cat.setFull(true);
+                    System.out.println(cat.toString());
+                    foodBowl.setCountOffoodinBowl(foodBowl.getCountOffoodinBowl() - cat.getHunger());
                 } else {
-                    System.out.println(catsArray[i].toString());
+                    System.out.println(cat.toString());
                 }
             }
 
@@ -45,16 +45,16 @@ public class Main {
         foodBowl.addFoodInBowl(30);
         System.out.println(foodBowl.toString());
 
-        for (int i = 0; i < catsArray.length; i++) {
-            if (catsArray[i].isFull()) {
-                System.out.println(catsArray[i].toString());
+        for (Cat cat : catsArray) {
+            if (cat.isFull()) {
+                System.out.println(cat.toString());
             } else {
-                if ((foodBowl.getCountOffoodinBowl() - catsArray[i].getHunger()) >= 0) {
-                    catsArray[i].setFull(true);
-                    System.out.println(catsArray[i].toString());
-                    foodBowl.setCountOffoodinBowl(foodBowl.getCountOffoodinBowl() - catsArray[i].getHunger());
+                if ((foodBowl.getCountOffoodinBowl() - cat.getHunger()) >= 0) {
+                    cat.setFull(true);
+                    System.out.println(cat.toString());
+                    foodBowl.setCountOffoodinBowl(foodBowl.getCountOffoodinBowl() - cat.getHunger());
                 } else {
-                    System.out.println(catsArray[i].toString());
+                    System.out.println(cat.toString());
                 }
             }
 

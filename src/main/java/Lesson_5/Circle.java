@@ -3,14 +3,12 @@ package Lesson_5;
 public class Circle implements AreaAndPerimeter {
     private String colorFill;
     private String colorOutline;
-    private double radius;
     private double area;
     private double perimeter;
 
     public Circle(String colorFill, String colorOutline, double radius) {
         this.colorFill = colorFill;
         this.colorOutline = colorOutline;
-        this.radius = radius;
         this.area = areaOfTheCircle(radius);
         this.perimeter = perimeterOfTheCircle(radius);
     }
