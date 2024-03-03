@@ -1,15 +1,13 @@
 package Lesson_5;
 
-import static Lesson_5.NumberOfAnimals.getNumberOfCats;
-import static Lesson_5.NumberOfAnimals.setNumberOfCats;
-
 public class Cat extends Animal {
+    private static int numberOfCats = 0;
     private String name;
     private int hunger;
     private boolean full;
 
     public Cat(String name) {
-        setNumberOfCats(getNumberOfCats() + 1);
+        numberOfCats += 1;
         this.name = name;
         this.hunger = (int) (Math.random() * 5 + 15);
         this.full = false;
@@ -29,6 +27,16 @@ public class Cat extends Animal {
 
         System.out.println("Кот " + this.name + " не может плавать.");
     }
+    public int eat(int foodBowl){
+        if ((foodBowl - hunger) >= 0) {
+            full = true;
+            System.out.println(toString());
+            return  foodBowl - hunger;
+        } else {
+            System.out.println(toString());
+            return foodBowl;
+        }
+    }
 
     public int getHunger() {
         return hunger;
@@ -40,6 +48,10 @@ public class Cat extends Animal {
 
     public void setFull(boolean full) {
         this.full = full;
+    }
+
+    public static int getNumberOfCats() {
+        return numberOfCats;
     }
 
     @Override

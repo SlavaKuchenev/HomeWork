@@ -1,5 +1,9 @@
 package Lesson_5;
 
+import static Lesson_5.Animal.getNumberOfAnimals;
+import static Lesson_5.Cat.getNumberOfCats;
+import static Lesson_5.Dog.getNumberOfDogs;
+
 public class Main {
     public static void main(String[] args) {
         Cat cat1 = new Cat("Жорик");
@@ -30,13 +34,7 @@ public class Main {
             if (cat.isFull()) {
                 System.out.println(cat.toString());
             } else {
-                if ((foodBowl.getCountOffoodinBowl() - cat.getHunger()) >= 0) {
-                    cat.setFull(true);
-                    System.out.println(cat.toString());
-                    foodBowl.setCountOffoodinBowl(foodBowl.getCountOffoodinBowl() - cat.getHunger());
-                } else {
-                    System.out.println(cat.toString());
-                }
+                foodBowl.setCountOffoodinBowl(cat.eat(foodBowl.getCountOffoodinBowl()));
             }
 
         }
@@ -49,19 +47,12 @@ public class Main {
             if (cat.isFull()) {
                 System.out.println(cat.toString());
             } else {
-                if ((foodBowl.getCountOffoodinBowl() - cat.getHunger()) >= 0) {
-                    cat.setFull(true);
-                    System.out.println(cat.toString());
-                    foodBowl.setCountOffoodinBowl(foodBowl.getCountOffoodinBowl() - cat.getHunger());
-                } else {
-                    System.out.println(cat.toString());
-                }
+                foodBowl.setCountOffoodinBowl(cat.eat(foodBowl.getCountOffoodinBowl()));
             }
 
         }
 
-        NumberOfAnimals numberOfAnimals = new NumberOfAnimals();
-        System.out.println(numberOfAnimals.toString());
+        System.out.println(NumberOfAnimals());
 
         Triangle triangle = new Triangle("black", "Red", 5, 6, 8);
         Rectangle rectangle = new Rectangle("black", "Red", 5, 6);
@@ -69,6 +60,13 @@ public class Main {
         System.out.println(triangle.toString());
         System.out.println(rectangle.toString());
         System.out.println(circle.toString());
+    }
+
+
+    public static String NumberOfAnimals(){
+        return "Количество животных: " + getNumberOfAnimals() +
+                ", количество собак: " + getNumberOfCats() +
+                ", количество котов: " + getNumberOfDogs();
     }
 
 

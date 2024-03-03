@@ -1,13 +1,11 @@
 package Lesson_5;
 
-import static Lesson_5.NumberOfAnimals.getNumberOfDogs;
-import static Lesson_5.NumberOfAnimals.setNumberOfDogs;
-
 public class Dog extends Animal {
+    private static int numberOfDogs = 0;
     private String name;
 
     public Dog(String name) {
-        setNumberOfDogs(getNumberOfDogs() + 1);
+        numberOfDogs += 1;
         this.name = name;
     }
 
@@ -27,5 +25,9 @@ public class Dog extends Animal {
         } else {
             System.out.println("Собака " + this.name + " не может столько плыть");
         }
+    }
+
+    public static int getNumberOfDogs() {
+        return numberOfDogs;
     }
 }

@@ -1,21 +1,30 @@
 package Lesson_5;
 
-public class Rectangle implements AreaAndPerimeter {
-    private String colorFill;
-    private String colorOutline;
-    private double area;
-    private double perimeter;
+public class Rectangle extends Figure {
+
+    private double height;
+    private double wide;
+
 
     public Rectangle(String colorFill, String colorOutline, double height, double wide) {
-        this.colorFill = colorFill;
-        this.colorOutline = colorOutline;
-        this.area = areaOfTheRectangle(height, wide);
-        this.perimeter = perimeterOfTheRectangle(height, wide);
+        super(colorFill, colorOutline);
+        this.height = height;
+        this.wide = wide;
+    }
+
+    @Override
+    public double area() {
+        return height * wide;
+    }
+
+    @Override
+    public double perimeter() {
+        return (height + wide) * 2;
     }
 
     @Override
     public String toString() {
-        return String.format("Площадь треугольника = %.2f, периметр треугольника = %.2f, цвет фона: %s, цвет границ: %s", area, perimeter, colorFill, colorOutline);
+        return String.format("Площадь прямоугольника = %.2f, периметр прямоугольника = %.2f,", area(), perimeter()) + super.toString();
     }
 
 }

@@ -1,12 +1,10 @@
 package Lesson_5;
 
-import static Lesson_5.NumberOfAnimals.getNumberOfAnimals;
-import static Lesson_5.NumberOfAnimals.setNumberOfAnimals;
-
 public class Animal {
+    private static int numberOfAnimals = 0;
 
     public Animal() {
-        setNumberOfAnimals(getNumberOfAnimals() + 1);
+        numberOfAnimals += 1;
     }
 
     public void run(int distans) {
@@ -17,4 +15,7 @@ public class Animal {
         System.out.println("Животное пробежало: " + distans+" метров.");
     }
 
+    public static int getNumberOfAnimals() {
+        return numberOfAnimals;
+    }
 }

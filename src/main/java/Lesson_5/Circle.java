@@ -1,20 +1,25 @@
 package Lesson_5;
 
-public class Circle implements AreaAndPerimeter {
-    private String colorFill;
-    private String colorOutline;
-    private double area;
-    private double perimeter;
+public class Circle extends Figure {
+    private double radius;
 
     public Circle(String colorFill, String colorOutline, double radius) {
-        this.colorFill = colorFill;
-        this.colorOutline = colorOutline;
-        this.area = areaOfTheCircle(radius);
-        this.perimeter = perimeterOfTheCircle(radius);
+        super(colorFill, colorOutline);
+        this.radius = radius;
+    }
+
+    @Override
+    public double area() {
+        return radius * radius * Math.PI;
+    }
+
+    @Override
+    public double perimeter() {
+        return 2 * radius * Math.PI;
     }
 
     @Override
     public String toString() {
-        return String.format("Площадь треугольника = %.2f, периметр треугольника = %.2f, цвет фона: %s, цвет границ: %s", area, perimeter, colorFill, colorOutline);
+        return String.format("Площадь круга = %.2f, периметр круга = %.2f,", area(), perimeter()) + super.toString();
     }
 }
