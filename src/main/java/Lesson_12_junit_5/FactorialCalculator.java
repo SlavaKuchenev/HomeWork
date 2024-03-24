@@ -10,11 +10,11 @@ public class FactorialCalculator {
         }
         int factorial = 1;
         try {
-            while (n>0){
+            while (n > 0) {
                 if (factorial * n < 0) {
                     throw new ArithmeticException("Переполнение при вычислении факториала для числа: " + n);
                 }
-                factorial=factorial*n;
+                factorial = factorial * n;
                 n--;
             }
         } catch (ArithmeticException e) {
