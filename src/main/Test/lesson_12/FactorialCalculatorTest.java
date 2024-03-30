@@ -1,4 +1,4 @@
-package org.example.Lesson_12_testng;
+package lesson_12;
 
 import org.example.Lesson_12_junit_5.FactorialCalculator;
 import org.testng.Assert;
@@ -6,9 +6,10 @@ import org.testng.annotations.Test;
 
 
 public class FactorialCalculatorTest {
+    FactorialCalculator factorial = new FactorialCalculator();
     @Test
     public void testFactorialCalculator() {
-        FactorialCalculator factorial = new FactorialCalculator();
+
         Assert.assertEquals(1, factorial.factorialCalculator(0));
         Assert.assertEquals(1, factorial.factorialCalculator(1));
         Assert.assertEquals(2, factorial.factorialCalculator(2));
@@ -19,13 +20,11 @@ public class FactorialCalculatorTest {
 
     @Test
     public void testNegativeInput() {
-        FactorialCalculator factorial = new FactorialCalculator();
         Assert.assertThrows(IllegalArgumentException.class, () -> factorial.factorialCalculator(-1));
     }
 
     @Test
     public void testLargeValue() {
-        FactorialCalculator factorial = new FactorialCalculator();
         Assert.assertThrows(ArithmeticException.class, () -> factorial.factorialCalculator(Integer.MAX_VALUE));
     }
 }
