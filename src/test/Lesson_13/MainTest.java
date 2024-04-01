@@ -56,7 +56,7 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void testContinueButtonForMobileServices()  {
+    public void testContinueButtonForMobileServices() {
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getButtonContinue())).isDisplayed(), "Название  блока отсуствует");
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getPhoneNumder())).isDisplayed(), "Название  блока отсуствует");
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", mts.getBlockTitle());

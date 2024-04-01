@@ -23,7 +23,6 @@ public class BaseTest {
 
     @BeforeEach
     void setup() {
-
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
@@ -31,7 +30,6 @@ public class BaseTest {
 
     @AfterEach
     void teardown() {
-
         driver.quit();
     }
 
