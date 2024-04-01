@@ -56,7 +56,7 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void testContinueButtonForMobileServices() throws InterruptedException {
+    public void testContinueButtonForMobileServices()  {
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getButtonContinue())).isDisplayed(), "Название  блока отсуствует");
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getPhoneNumder())).isDisplayed(), "Название  блока отсуствует");
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", mts.getBlockTitle());
@@ -65,10 +65,9 @@ public class MainTest extends BaseTest {
         mts.getTotalRub().click();
         mts.getTotalRub().sendKeys("20");
         mts.clickToButtonContinue();
-        Thread.sleep(5000);
-        WebElement element1 = driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"));
+        WebElement element1 = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"))));
         driver.switchTo().frame(element1);
-        assertTrue(mts.getBlockTitlePayment().isDisplayed());
+        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getBlockTitlePayment())).isDisplayed());
 
     }
 }
