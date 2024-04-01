@@ -25,10 +25,8 @@ public class Mts {
     private List<WebElement> paymentSystemLogos;
     @FindBy(xpath = "//p[contains(text(),'Оплата:')]")
     private WebElement blockTitlePayment;
-    @FindBy(xpath = "//ul[@class = 'select__list']//p")
-    private List<WebElement> paymentSelectList;
 
-
+    
     public List<WebElement> getPaymentSystemLogos() {
         return paymentSystemLogos;
     }
@@ -67,9 +65,5 @@ public class Mts {
 
     public WebElement getBlockTitlePayment() {
         return blockTitlePayment;
-    }
-
-    public List<WebElement> getPaymentSelectList() {
-        return paymentSelectList;
     }
 }
