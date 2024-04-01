@@ -39,7 +39,7 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void PaymentSystemLogos() {
+    public void testPaymentSystemLogos() {
 
         assertTrue(mts.getPaymentSystemLogos().size() > 0, "Логотипы платёжных систем отсуствуют");
         for (WebElement logo : mts.getPaymentSystemLogos()) {
@@ -52,7 +52,6 @@ public class MainTest extends BaseTest {
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getServiceDetailsLink())).isDisplayed(), "Название  блока отсуствует");
         mts.clickServiceDetailsLink();
         assertEquals(driver.getCurrentUrl(), "https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/");
-
     }
 
     @Test
@@ -68,6 +67,5 @@ public class MainTest extends BaseTest {
         WebElement element1 = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"))));
         driver.switchTo().frame(element1);
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getBlockTitlePayment())).isDisplayed());
-
     }
 }

@@ -69,7 +69,4 @@ public class Mts {
         return blockTitlePayment;
     }
 
-    public List<WebElement> getPaymentSelectList() {
-        return paymentSelectList;
-    }
 }
