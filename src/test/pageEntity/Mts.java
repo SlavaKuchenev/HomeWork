@@ -11,8 +11,6 @@ public class Mts {
 
     @FindBy(xpath = "//div[@class='cookie__buttons']/button[@class='btn btn_black cookie__ok']")
     private WebElement cookiAceptMenu;
-    @FindBy(xpath = "//a[contains(text(),'Подробнее о сервисе')]")
-    private WebElement serviceDetailsLink;
     @FindBy(xpath = "//div[@class='pay__wrapper']/h2[contains(text(),'Онлайн пополнение ')]")
     private WebElement blockTitle;
     @FindBy(xpath = "//form[@id='pay-connection']/descendant::input[@class='phone']")
@@ -21,8 +19,6 @@ public class Mts {
     private WebElement totalRub;
     @FindBy(xpath = "//form[@id='pay-connection']/descendant::button[contains(text(),'Продолжить')]")
     private WebElement buttonContinue;
-    @FindBy(xpath = "//div[@class='pay__partners']/descendant::img[starts-with(@src,'/local')]")
-    private List<WebElement> paymentSystemLogos;
     @FindBy(xpath = "//p[contains(text(),'Оплата:')]")
     private WebElement blockTitlePayment;
     @FindBy(xpath = "//ul[@class = 'select__list']//p")
@@ -36,25 +32,12 @@ public class Mts {
     @FindBy(xpath = "//div[@class= 'cards-brands ng-tns-c49-1']//img")
     private List<WebElement> cardsBrandsList;
 
-
-    public List<WebElement> getPaymentSystemLogos() {
-        return paymentSystemLogos;
-    }
-
     public void clickToCookieAcceptButton() {
         cookiAceptMenu.click();
     }
 
-    public void clickServiceDetailsLink() {
-        serviceDetailsLink.click();
-    }
-
     public WebElement getBlockTitle() {
         return blockTitle;
-    }
-
-    public WebElement getServiceDetailsLink() {
-        return serviceDetailsLink;
     }
 
     public WebElement getPhoneNumder() {
