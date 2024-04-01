@@ -40,7 +40,6 @@ public class MainTest extends BaseTest {
 
     @Test
     public void testPaymentSystemLogos() {
-
         assertTrue(mts.getPaymentSystemLogos().size() > 0, "Логотипы платёжных систем отсуствуют");
         for (WebElement logo : mts.getPaymentSystemLogos()) {
             assertTrue(logo.isDisplayed(), "Логотип отсуствует");

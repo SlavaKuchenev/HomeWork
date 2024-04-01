@@ -68,5 +68,4 @@ public class Mts {
     public WebElement getBlockTitlePayment() {
         return blockTitlePayment;
     }
-
 }
