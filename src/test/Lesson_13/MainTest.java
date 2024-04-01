@@ -11,7 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageEntity.Mts;
 
 import java.time.Duration;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -32,43 +34,73 @@ public class MainTest extends BaseTest {
         mts.clickToCookieAcceptButton();
     }
 
-    @Test
-    public void testBlockTitle() {
-        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getBlockTitle())).isDisplayed(), "Название  блока отсуствует");
-        assertEquals("Онлайн пополнение\nбез комиссии", mts.getBlockTitle().getText(), "Название  блока не корректно");
-    }
+    List<String> expectedOptions = Arrays.asList("Услуги связи", "Домашний интернет", "Рассрочка", "Задолженность");
 
     @Test
-    public void PaymentSystemLogos() {
-
-        assertTrue(mts.getPaymentSystemLogos().size() > 0, "Логотипы платёжных систем отсуствуют");
-        for (WebElement logo : mts.getPaymentSystemLogos()) {
-            assertTrue(logo.isDisplayed(), "Логотип отсуствует");
+    public void testEmptyFieldLabels() {
+        mts.getPaymentSelectListButton().click();
+        List<String> actualOptions = new ArrayList<>();
+        wait.until(ExpectedConditions.visibilityOfAllElements(mts.getPaymentSelectList()));
+        for (WebElement element : mts.getPaymentSelectList()) {
+            assertTrue(element.isDisplayed());
+            actualOptions.add(element.getAttribute("innerHTML"));
         }
+        assertEquals(expectedOptions, actualOptions);
     }
 
-    @Test
-    public void testServiceDetailsLink() {
-        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getServiceDetailsLink())).isDisplayed(), "Название  блока отсуствует");
-        mts.clickServiceDetailsLink();
-        assertEquals(driver.getCurrentUrl(), "https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/");
-
-    }
+    List<String> expectedOptionsCardName = Arrays.asList("Номер карты", "Срок действия", "CVC", "Имя держателя (как на карте)");
 
     @Test
-    public void testContinueButtonForMobileServices() throws InterruptedException {
+    public void testContinueBMobileServices() {
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getButtonContinue())).isDisplayed(), "Название  блока отсуствует");
-        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getPhoneNumder())).isDisplayed(), "Название  блока отсуствует");
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", mts.getBlockTitle());
         mts.getPhoneNumder().click();
         mts.getPhoneNumder().sendKeys("297777777");
         mts.getTotalRub().click();
         mts.getTotalRub().sendKeys("20");
         mts.clickToButtonContinue();
-        Thread.sleep(5000);
         WebElement element1 = driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"));
         driver.switchTo().frame(element1);
-        assertTrue(mts.getBlockTitlePayment().isDisplayed());
+        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getBlockTitlePayment())).isDisplayed());
+        for (String expectedOption : expectedOptionsCardName){
+        WebElement optionElement = driver.findElement(By.xpath("//label[text()='" + expectedOption + "']"));
+        assertTrue(optionElement.isDisplayed());
+        }
+    }
 
+    @Test
+    public void testCardsBrandsLogo(){
+        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getButtonContinue())).isDisplayed(), "Название  блока отсуствует");
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", mts.getBlockTitle());
+        mts.getPhoneNumder().click();
+        mts.getPhoneNumder().sendKeys("297777777");
+        mts.getTotalRub().click();
+        mts.getTotalRub().sendKeys("20");
+        mts.clickToButtonContinue();
+        WebElement element1 = driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"));
+        driver.switchTo().frame(element1);
+        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getBlockTitlePayment())).isDisplayed());
+        assertTrue(mts.getCardsBrandsList().size() > 0, "Логотипы платёжных систем отсуствуют");
+        for (WebElement logo : mts.getCardsBrandsList()) {
+            assertTrue(wait.until(ExpectedConditions.visibilityOf(logo)).isDisplayed(), "Логотип отсуствует");
+        }
+    }
+
+    @Test
+    public void testCostAndNumber(){
+        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getButtonContinue())).isDisplayed(), "Название  блока отсуствует");
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", mts.getBlockTitle());
+        mts.getPhoneNumder().click();
+        mts.getPhoneNumder().sendKeys("297777777");
+        mts.getTotalRub().click();
+        mts.getTotalRub().sendKeys("20");
+        mts.clickToButtonContinue();
+        WebElement element1 = driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"));
+        driver.switchTo().frame(element1);
+        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getBlockTitlePayment())).isDisplayed());
+        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getButtonContinuePayment())).isDisplayed());
+        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getCostOfPayment())).isDisplayed());
+        assertEquals(mts.getBlockTitlePayment().getText(),"Оплата: Услуги связи Номер:375297777777");
     }
 }
+
