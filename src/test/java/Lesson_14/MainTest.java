@@ -1,4 +1,4 @@
-package Lesson_13;
+package Lesson_14;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,6 +33,18 @@ public class MainTest extends BaseTest {
         driver.get("https://www.mts.by/");
         mts.clickToCookieAcceptButton();
     }
+    public void openPaymentContainer(){
+        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getButtonContinue())).isDisplayed(), "Название  блока отсуствует");
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", mts.getBlockTitle());
+        mts.getPhoneNumder().click();
+        mts.getPhoneNumder().sendKeys("297777777");
+        mts.getTotalRub().click();
+        mts.getTotalRub().sendKeys("20");
+        mts.clickToButtonContinue();
+        WebElement element1 = driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"));
+        driver.switchTo().frame(element1);
+    }
+
 
     List<String> expectedOptions = Arrays.asList("Услуги связи", "Домашний интернет", "Рассрочка", "Задолженность");
 
@@ -52,15 +64,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void testContinueBMobileServices() {
-        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getButtonContinue())).isDisplayed(), "Название  блока отсуствует");
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", mts.getBlockTitle());
-        mts.getPhoneNumder().click();
-        mts.getPhoneNumder().sendKeys("297777777");
-        mts.getTotalRub().click();
-        mts.getTotalRub().sendKeys("20");
-        mts.clickToButtonContinue();
-        WebElement element1 = driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"));
-        driver.switchTo().frame(element1);
+        openPaymentContainer();
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getBlockTitlePayment())).isDisplayed());
         for (String expectedOption : expectedOptionsCardName){
         WebElement optionElement = driver.findElement(By.xpath("//label[text()='" + expectedOption + "']"));
@@ -70,15 +74,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void testCardsBrandsLogo(){
-        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getButtonContinue())).isDisplayed(), "Название  блока отсуствует");
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", mts.getBlockTitle());
-        mts.getPhoneNumder().click();
-        mts.getPhoneNumder().sendKeys("297777777");
-        mts.getTotalRub().click();
-        mts.getTotalRub().sendKeys("20");
-        mts.clickToButtonContinue();
-        WebElement element1 = driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"));
-        driver.switchTo().frame(element1);
+        openPaymentContainer();
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getBlockTitlePayment())).isDisplayed());
         assertTrue(mts.getCardsBrandsList().size() > 0, "Логотипы платёжных систем отсуствуют");
         for (WebElement logo : mts.getCardsBrandsList()) {
@@ -88,15 +84,7 @@ public class MainTest extends BaseTest {
 
     @Test
     public void testCostAndNumber(){
-        assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getButtonContinue())).isDisplayed(), "Название  блока отсуствует");
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", mts.getBlockTitle());
-        mts.getPhoneNumder().click();
-        mts.getPhoneNumder().sendKeys("297777777");
-        mts.getTotalRub().click();
-        mts.getTotalRub().sendKeys("20");
-        mts.clickToButtonContinue();
-        WebElement element1 = driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"));
-        driver.switchTo().frame(element1);
+        openPaymentContainer();
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getBlockTitlePayment())).isDisplayed());
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getButtonContinuePayment())).isDisplayed());
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getCostOfPayment())).isDisplayed());

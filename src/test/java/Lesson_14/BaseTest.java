@@ -1,4 +1,4 @@
-package Lesson_13;
+package Lesson_14;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -32,5 +32,4 @@ public class BaseTest {
     void teardown() {
         driver.quit();
     }
-
 }
