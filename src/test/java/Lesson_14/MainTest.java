@@ -33,6 +33,7 @@ public class MainTest extends BaseTest {
         driver.get("https://www.mts.by/");
         mts.clickToCookieAcceptButton();
     }
+
     public void openPaymentContainer(){
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getButtonContinue())).isDisplayed(), "Название  блока отсуствует");
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", mts.getBlockTitle());
@@ -44,8 +45,6 @@ public class MainTest extends BaseTest {
         WebElement element1 = driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"));
         driver.switchTo().frame(element1);
     }
-
-
     List<String> expectedOptions = Arrays.asList("Услуги связи", "Домашний интернет", "Рассрочка", "Задолженность");
 
     @Test

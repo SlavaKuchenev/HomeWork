@@ -12,15 +12,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.time.Duration;
 
 public class BaseTest {
-
     WebDriver driver;
 
     @BeforeAll
     static void setupAll() {
         WebDriverManager.chromedriver().setup();
     }
-
-
     @BeforeEach
     void setup() {
         driver = new ChromeDriver();
