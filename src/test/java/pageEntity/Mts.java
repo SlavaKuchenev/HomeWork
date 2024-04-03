@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Mts {
 
-
     @FindBy(xpath = "//div[@class='cookie__buttons']/button[@class='btn btn_black cookie__ok']")
     private WebElement cookiAceptMenu;
     @FindBy(xpath = "//a[contains(text(),'Подробнее о сервисе')]")

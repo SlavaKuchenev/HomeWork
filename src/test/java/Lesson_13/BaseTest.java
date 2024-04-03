@@ -20,7 +20,6 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
     }
 
-
     @BeforeEach
     void setup() {
         driver = new ChromeDriver();
