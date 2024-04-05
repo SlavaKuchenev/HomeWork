@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class Mts {
-        @FindBy(xpath = "//div[@class='cookie__buttons']/button[@class='btn btn_black cookie__ok']")
+    @FindBy(xpath = "//div[@class='cookie__buttons']/button[@class='btn btn_black cookie__ok']")
     private WebElement cookiAceptMenu;
     @FindBy(xpath = "//div[@class='pay__wrapper']/h2[contains(text(),'Онлайн пополнение ')]")
     private WebElement blockTitle;
@@ -29,6 +29,18 @@ public class Mts {
     private WebElement costOfPayment;
     @FindBy(xpath = "//div[@class= 'cards-brands ng-tns-c49-1']//img")
     private List<WebElement> cardsBrandsList;
+    @FindBy(xpath = "//input[@placeholder='Номер абонента']")
+    private WebElement subscriberNumber;
+    @FindBy(xpath = "//input[@placeholder='Номер абонента']")
+    private WebElement accountPhoneNumber;
+    @FindBy(xpath = "//input[@placeholder='Номер абонента']")
+    private WebElement accountNumberComb;
+    @FindBy(xpath = "//input[@placeholder='Номер счета на 2073']")
+    private WebElement accountNumberDebt;
+    @FindBy(xpath = "//input[@placeholder='Сумма']")
+    private WebElement paymentAmount;
+    @FindBy(xpath = "//input[@placeholder='E-mail для отправки чека']")
+    private WebElement email;
 
     public void clickToCookieAcceptButton() {
         cookiAceptMenu.click();
@@ -77,4 +89,27 @@ public class Mts {
     public List<WebElement> getCardsBrandsList() {
         return cardsBrandsList;
     }
-}
+
+    public WebElement getSubscriberNumber() {
+        return subscriberNumber;
+    }
+
+    public WebElement getAccountPhoneNumber() {
+        return accountPhoneNumber;
+    }
+
+    public WebElement getAccountNumberComb() {
+        return accountNumberComb;
+    }
+
+    public WebElement getAccountNumberDebt() {
+        return accountNumberDebt;
+    }
+
+    public WebElement getPaymentAmount() {
+        return paymentAmount;
+    }
+
+    public WebElement getEmail() {
+        return email;
+    }
