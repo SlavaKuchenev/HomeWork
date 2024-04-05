@@ -34,45 +34,71 @@ public class MainTest extends BaseTest {
         mts.clickToCookieAcceptButton();
     }
 
-    public void openPaymentContainer(){
+    public void openPaymentContainer() {
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getButtonContinue())).isDisplayed(), "Название  блока отсуствует");
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", mts.getBlockTitle());
-        mts.getPhoneNumder().click();
         mts.getPhoneNumder().sendKeys("297777777");
-        mts.getTotalRub().click();
         mts.getTotalRub().sendKeys("20");
         mts.clickToButtonContinue();
         WebElement element1 = driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"));
         driver.switchTo().frame(element1);
     }
+
     List<String> expectedOptions = Arrays.asList("Услуги связи", "Домашний интернет", "Рассрочка", "Задолженность");
 
-    @Test
-    public void testEmptyFieldLabels() {
+    @ParameterizedTest
+    @ValueSource(strings = {"Услуги связи", "Домашний интернет", "Рассрочка", "Задолженность"})
+    @DisplayName("Наличие лейблов")
+    public void testEmptyFieldLabels(String desiredName) {
         mts.getPaymentSelectListButton().click();
-        List<String> actualOptions = new ArrayList<>();
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 250);", mts.getBlockTitle());
         wait.until(ExpectedConditions.visibilityOfAllElements(mts.getPaymentSelectList()));
         for (WebElement element : mts.getPaymentSelectList()) {
-            assertTrue(element.isDisplayed());
-            actualOptions.add(element.getAttribute("innerHTML"));
+            if (element.getAttribute("innerHTML") == desiredName) {
+                element.click();
+                assertTrue(mts.getAccountPhoneNumber().isDisplayed());
+                assertTrue(mts.getEmail().isDisplayed());
+                assertTrue(mts.getPaymentAmount().isDisplayed());
+            }
+            if (element.getAttribute("innerHTML") == desiredName) {
+                element.click();
+                assertTrue(mts.getSubscriberNumber().isDisplayed());
+                assertTrue(mts.getEmail().isDisplayed());
+                assertTrue(mts.getPaymentAmount().isDisplayed());
+            }
+            if (element.getAttribute("innerHTML") == desiredName) {
+                element.click();
+                assertTrue(mts.getAccountNumberComb().isDisplayed());
+                assertTrue(mts.getEmail().isDisplayed());
+                assertTrue(mts.getPaymentAmount().isDisplayed());
+            }
+            if (element.getAttribute("innerHTML") == desiredName) {
+                element.click();
+                assertTrue(mts.getAccountNumberDebt().isDisplayed());
+                assertTrue(mts.getEmail().isDisplayed());
+                assertTrue(mts.getPaymentAmount().isDisplayed());
+            }
+
         }
-        assertEquals(expectedOptions, actualOptions);
     }
+
 
     List<String> expectedOptionsCardName = Arrays.asList("Номер карты", "Срок действия", "CVC", "Имя держателя (как на карте)");
 
     @Test
+    @DisplayName("Наличие надписи в незаполненных полях")
     public void testContinueBMobileServices() {
         openPaymentContainer();
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getBlockTitlePayment())).isDisplayed());
-        for (String expectedOption : expectedOptionsCardName){
-        WebElement optionElement = driver.findElement(By.xpath("//label[text()='" + expectedOption + "']"));
-        assertTrue(optionElement.isDisplayed());
+        for (String expectedOption : expectedOptionsCardName) {
+            WebElement optionElement = driver.findElement(By.xpath("//label[text()='" + expectedOption + "']"));
+            assertTrue(optionElement.isDisplayed());
         }
     }
 
     @Test
-    public void testCardsBrandsLogo(){
+    @DisplayName("Наличие лейблов")
+    public void testCardsBrandsLogo() {
         openPaymentContainer();
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getBlockTitlePayment())).isDisplayed());
         assertTrue(mts.getCardsBrandsList().size() > 0, "Логотипы платёжных систем отсуствуют");
@@ -82,12 +108,12 @@ public class MainTest extends BaseTest {
     }
 
     @Test
-    public void testCostAndNumber(){
+    public void testCostAndNumber() {
         openPaymentContainer();
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getBlockTitlePayment())).isDisplayed());
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getButtonContinuePayment())).isDisplayed());
         assertTrue(wait.until(ExpectedConditions.visibilityOf(mts.getCostOfPayment())).isDisplayed());
-        assertEquals(mts.getBlockTitlePayment().getText(),"Оплата: Услуги связи Номер:375297777777");
+        assertEquals(mts.getBlockTitlePayment().getText(), "Оплата: Услуги связи Номер:375297777777");
     }
 }
 
