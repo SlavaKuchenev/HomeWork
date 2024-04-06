@@ -27,14 +27,12 @@ public class MainTest extends BaseTest {
         Collections.sort(productsName);
         Collections.sort(productsNameBasket);
         assertEquals(wildberriesBaskedPage.numberProduct().size(), numberProduct.length);
-        Thread.sleep(5000);
+        Thread.sleep(3000);
         assertEquals(productPriceSum, wildberriesBaskedPage.getProductPriceSum());
         assertEquals(productsName,productsNameBasket);
         assertEquals(productPriceSum, wildberriesBaskedPage.getProductPriceSum());
         for(int i : wildberriesBaskedPage.numberOneProductLocator()){
             assertTrue(i == 1);
-        }
-
-        Thread.sleep(20000);
+        }    ;
     }
 }
