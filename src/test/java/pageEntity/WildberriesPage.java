@@ -26,7 +26,7 @@ public class WildberriesPage {
 
     By buttonAddToCart = By.xpath("//div[@class='product-card__wrapper']//a[@class='product-card__add-basket j-add-to-basket btn-main']");
     By productName = By.xpath("//div[@class='product-card__wrapper']//span[@class='product-card__name']");
-    By productPrice = By.xpath("//div[@class='product-card__wrapper']//del");
+    By productPrice = By.xpath("//div[@class='product-card__wrapper']//ins");
 
     By popupListSize = By.xpath("//div[@class='popup popup-list-of-sizes shown slideUp']");
 

@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
@@ -16,6 +18,8 @@ public class MainTest extends BaseTest {
     @Test
     public void testAddingToCartAndChecking() throws InterruptedException {
         wildberriesPage.addToCart(numberProduct);
-        Thread.sleep(10000);
+        List<String> productsName = wildberriesPage.getProductName(numberProduct);
+        List<String> productsPrice = wildberriesPage.getProductPrice(numberProduct);
+        Thread.sleep(20000);
     }
 }
