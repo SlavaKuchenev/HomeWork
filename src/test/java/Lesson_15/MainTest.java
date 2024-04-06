@@ -17,9 +17,11 @@ public class MainTest extends BaseTest {
 
     @Test
     public void testAddingToCartAndChecking() throws InterruptedException {
-        wildberriesPage.addToCart(numberProduct);
+        wildberriesPage.addToBasket(numberProduct);
         List<String> productsName = wildberriesPage.getProductName(numberProduct);
         List<String> productsPrice = wildberriesPage.getProductPrice(numberProduct);
+        wildberriesPage.goToBasket();
+
         Thread.sleep(20000);
     }
 }

@@ -10,11 +10,10 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WildberriesPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
 
     public WildberriesPage(WebDriver driver) {
         this.driver = driver;
@@ -22,38 +21,39 @@ public class WildberriesPage {
     }
 
 
-    By productCard = By.xpath("//div[@class='product-card__wrapper']");
+    By productCardLocator = By.xpath("//div[@class='product-card__wrapper']");
 
-    By buttonAddToCart = By.xpath("//div[@class='product-card__wrapper']//a[@class='product-card__add-basket j-add-to-basket btn-main']");
-    By productName = By.xpath("//div[@class='product-card__wrapper']//span[@class='product-card__name']");
-    By productPrice = By.xpath("//div[@class='product-card__wrapper']//ins");
+    By buttonAddToBasketLocator = By.xpath("//div[@class='product-card__wrapper']//a[@class='product-card__add-basket j-add-to-basket btn-main']");
+    By buttonToBasketLocator = By.xpath("//div[@class='navbar-pc__item j-item-basket']/a");
+    By productNameLocator = By.xpath("//div[@class='product-card__wrapper']//span[@class='product-card__name']");
+    By productPriceLocator = By.xpath("//div[@class='product-card__wrapper']//ins");
 
-    By popupListSize = By.xpath("//div[@class='popup popup-list-of-sizes shown slideUp']");
+    By popupListSizeLocator = By.xpath("//div[@class='popup popup-list-of-sizes shown slideUp']");
 
-    By popupListSizeLabel = By.xpath("//li");
+    By popupListSizeLabelLocator = By.xpath("//li");
 
-    public void addToCart(int[] numberProduct) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(productCard));
-        List<WebElement> productsButton = driver.findElements(buttonAddToCart);
+    public void addToBasket(int[] numberProduct) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(productCardLocator));
+        List<WebElement> productsButton = driver.findElements(buttonAddToBasketLocator);
         for (int i : numberProduct) {
             productsButton.get(i).click();
             if (isPopupListSizeDisplayed()) {
-                driver.findElement(popupListSize).findElements(popupListSizeLabel).get(0).click();
+                driver.findElement(popupListSizeLocator).findElements(popupListSizeLabelLocator).get(0).click();
             }
         }
     }
 
     private boolean isPopupListSizeDisplayed() {
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(popupListSize));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(popupListSizeLocator));
             return true;
         } catch (Exception e) {
             return false;
         }
     }
     public List<String> getProductPrice(int[] numberProduct) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(productCard));
-        List<WebElement> productsPrice = driver.findElements(productPrice);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(productCardLocator));
+        List<WebElement> productsPrice = driver.findElements(productPriceLocator);
         List<String> productPrice= new ArrayList<>();
         for (int i : numberProduct) {
             productPrice.add(productsPrice.get(i).getText());
@@ -62,42 +62,17 @@ public class WildberriesPage {
     }
 
     public List<String> getProductName(int[] numberProduct) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(productCard));
-        List<WebElement> productsName = driver.findElements(productName);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(productCardLocator));
+        List<WebElement> productsName = driver.findElements(productNameLocator);
         List<String> productName= new ArrayList<>();
         for (int i : numberProduct) {
             productName.add(productsName.get(i).getText());
         }
         return productName;
     }
+    public WildberriesBaskedPage goToBasket() {
+        driver.findElement(buttonToBasketLocator).click();
+        return new  WildberriesBaskedPage(driver);
+    }
 
 }
-/*public void getProductPrice(int[] randomNumberProduct) {
-        productCard.get(randomNumberProduct[0]).findElement(By.xpath("//a[@class='product-card__add-basket j-add-to-basket btn-main']")).click();
-        productCard.get(randomNumberProduct[1]).findElement(By.xpath("//a[@class='product-card__add-basket j-add-to-basket btn-main']")).click();
-        productCard.get(randomNumberProduct[2]).findElement(By.xpath("//a[@class='product-card__add-basket j-add-to-basket btn-main']")).click();
-    }
-
-    public void goToCart() {
-        // Реализация перехода в корзину
-    }
-
-    public boolean isProductInCart(String productName) {
-        // Реализация проверки наличия товара в корзине
-        return false;
-    }
-
-    public int getProductQuantityInCart(String productName) {
-        // Реализация получения количества товара в корзине
-        return 0;
-    }
-
-    public int getProductPriceInCart(String productName) {
-        // Реализация получения цены товара в корзине
-        return 0;
-    }
-
-    public int getTotalPriceInCart() {
-        // Реализация получения общей суммы товаров в корзине
-        return 0;
-    }*/
