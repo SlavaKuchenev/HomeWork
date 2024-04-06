@@ -1,20 +1,21 @@
 package Lesson_15;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import pageEntity.WildberriesPage;
+import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
-
-    WildberriesPage wildberriesPage;
-    WebDriverWait wait;
-
+    int[] numberProduct = {0,3,5};
     @BeforeEach
-    void initPageObject() {
-        wildberriesPage = PageFactory.initElements(driver, WildberriesPage.class);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    void initPageObject() throws InterruptedException {
+
+    }
+
+    @Test
+    public void testAddingToCartAndChecking() throws InterruptedException {
+        wildberriesPage.addToCart(numberProduct);
+        Thread.sleep(10000);
     }
 }

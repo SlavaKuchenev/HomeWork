@@ -7,12 +7,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pageEntity.WildberriesPage;
 
 
 import java.time.Duration;
 
 public class BaseTest {
-    WebDriver driver;
+    protected WebDriver driver;
+    protected WildberriesPage wildberriesPage;
 
     @BeforeAll
     static void setupAll() {
@@ -21,6 +23,8 @@ public class BaseTest {
     @BeforeEach
     void setup() {
         driver = new ChromeDriver();
+        wildberriesPage = new WildberriesPage(driver);
+        driver.get("https://www.wildberries.ru/");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
     }
