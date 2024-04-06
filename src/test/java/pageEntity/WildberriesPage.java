@@ -49,14 +49,14 @@ public class WildberriesPage {
         }
     }
 
-    public int getProductPriceSum(int[] numberProduct) {
+    public List<Integer> getProductPriceSum(int[] numberProduct) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(productCardLocator));
         List<WebElement> productsPrice = driver.findElements(productPriceLocator);
-        int productPrice = 0;
+        List<Integer> productPriceList = new ArrayList<>();
         for (int i : numberProduct) {
-            productPrice += Integer.parseInt(productsPrice.get(i).getText().replaceAll("[₽\\s]", ""));
+            productPriceList.add(Integer.parseInt(productsPrice.get(i).getText().replaceAll("[₽\\s]", "")));
         }
-        return productPrice;
+        return productPriceList;
     }
 
     public List<String> getProductName(int[] numberProduct) {

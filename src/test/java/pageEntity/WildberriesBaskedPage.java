@@ -35,14 +35,14 @@ public class WildberriesBaskedPage extends WildberriesPage {
         return productName;
     }
 
-    public int getProductPriceSum() {
+    public List<Integer> getProductPrice() {
         List<WebElement> productsPrice = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(productPriceLocator)));
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(productsPrice.get(0), "formatMoneyAnim")));
-        int productPrice = 0;
+        List<Integer> productPriceList = new ArrayList<>();
         for (WebElement element : productsPrice) {
-            productPrice += Integer.parseInt(element.getText().replaceAll("[₽\\s]", ""));
+            productPriceList.add(Integer.parseInt(element.getText().replaceAll("[₽\\s]", "")));
         }
-        return productPrice;
+        return productPriceList;
     }
 
     public int getProductPriceWithoutDiscountSum() {

@@ -17,7 +17,7 @@ public class MainTest extends BaseTest {
         int[] numberProduct = {0, 3, 5};
         wildberriesPage.addToBasket(numberProduct);
         List<String> productsName = wildberriesPage.getProductName(numberProduct);
-        int productPriceSum = wildberriesPage.getProductPriceSum(numberProduct);
+        List<Integer> productPriceList = wildberriesPage.getProductPriceSum(numberProduct);
         WildberriesBaskedPage wildberriesBaskedPage = wildberriesPage.goToBasket();
         List<String> productsNameBasket = wildberriesBaskedPage.getProductName();
         Collections.sort(productsName);
@@ -25,7 +25,10 @@ public class MainTest extends BaseTest {
         assertEquals(wildberriesBaskedPage.numberProduct().size(), numberProduct.length);
         Thread.sleep(3000);
         assertEquals(productsName, productsNameBasket);
-        assertEquals(productPriceSum, wildberriesBaskedPage.getProductPriceSum());
+        List<Integer> productPriceBaskedList = wildberriesBaskedPage.getProductPrice();
+        Collections.sort(productPriceList);
+        Collections.sort(productPriceBaskedList);
+        assertEquals(productPriceList, productPriceBaskedList);
         assertEquals(wildberriesBaskedPage.getProductPriceWithoutDiscountSum(), wildberriesBaskedPage.getProductPriceAll());
         for (int i : wildberriesBaskedPage.numberOneProductLocator()) {
             assertEquals(1, i);
