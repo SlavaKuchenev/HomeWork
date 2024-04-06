@@ -51,12 +51,12 @@ public class WildberriesPage {
             return false;
         }
     }
-    public List<String> getProductPrice(int[] numberProduct) {
+    public int getProductPriceSum(int[] numberProduct) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(productCardLocator));
         List<WebElement> productsPrice = driver.findElements(productPriceLocator);
-        List<String> productPrice= new ArrayList<>();
+        int productPrice= 0;
         for (int i : numberProduct) {
-            productPrice.add(productsPrice.get(i).getText().replaceAll("₽", ""));
+            productPrice += Integer.parseInt(productsPrice.get(i).getText().replaceAll("[₽\\s]", ""));
         }
         return productPrice;
     }
@@ -74,5 +74,6 @@ public class WildberriesPage {
         driver.findElement(buttonToBasketLocator).click();
         return new  WildberriesBaskedPage(driver);
     }
+
 
 }

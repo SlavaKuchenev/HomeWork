@@ -1,10 +1,7 @@
 package pageEntity;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +10,10 @@ import java.util.List;
 public class WildberriesBaskedPage extends WildberriesPage {
 
     By numberProductLocator= By.xpath("//div[@class='list-item__good']");
+    By numberOneProductLocator= By.xpath("//input[@type= 'number']");
     By productNameLocator= By.xpath("//div[@class='list-item__good']//span[@class='good-info__good-name']");
     By productPriceLocator= By.xpath("//div[@class='list-item__price-wallet']");
+    By productPriceSumLocator= By.xpath("//span[@class= 'b-right']");
 
 
     public WildberriesBaskedPage(WebDriver driver) {
@@ -34,13 +33,31 @@ public class WildberriesBaskedPage extends WildberriesPage {
         return productName;
     }
 
-    public List<String> getProductPrice(int[] numberProduct) {
+    public int getProductPriceSum() {
         List<WebElement> productsPrice = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(productPriceLocator)));
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(productsPrice.get(0), "formatMoneyAnim")));
-        List<String> productPrice= new ArrayList<>();
-        for (int i : numberProduct) {
-            productPrice.add(productsPrice.get(i).getText().replaceAll("₽", ""));
+        int productPrice= 0;
+        for (WebElement element : productsPrice) {
+            productPrice += Integer.parseInt(element.getText().replaceAll("[₽\\s]", ""));
         }
         return productPrice;
+    }
+
+    public int getProductPriceAll() {
+        WebElement productsPrice = wait.until(ExpectedConditions.visibilityOf(driver.findElement(productPriceSumLocator)));
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(productsPrice, "formatMoneyAnim")));
+        return Integer.parseInt(productsPrice.getText().replaceAll("[₽\\s]", ""));
+    }
+
+    public List<Integer> numberOneProductLocator() {
+        List<WebElement> numberOneProduct = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(numberOneProductLocator)));
+        List<Integer> numberOneProductList = new ArrayList<>();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        for (WebElement element : numberOneProduct) {
+            String valueAsString = (String) js.executeScript("return arguments[0].value;", element);
+            int value = Integer.parseInt(valueAsString);
+            numberOneProductList.add(value);
+        }
+        return numberOneProductList;
     }
 }
