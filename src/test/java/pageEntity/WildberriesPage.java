@@ -56,7 +56,7 @@ public class WildberriesPage {
         List<WebElement> productsPrice = driver.findElements(productPriceLocator);
         List<String> productPrice= new ArrayList<>();
         for (int i : numberProduct) {
-            productPrice.add(productsPrice.get(i).getText());
+            productPrice.add(productsPrice.get(i).getText().replaceAll("₽", ""));
         }
         return productPrice;
     }

@@ -14,6 +14,7 @@ public class WildberriesBaskedPage extends WildberriesPage {
 
     By numberProductLocator= By.xpath("//div[@class='list-item__good']");
     By productNameLocator= By.xpath("//div[@class='list-item__good']//span[@class='good-info__good-name']");
+    By productPriceLocator= By.xpath("//div[@class='list-item__price-wallet']");
 
 
     public WildberriesBaskedPage(WebDriver driver) {
@@ -31,5 +32,15 @@ public class WildberriesBaskedPage extends WildberriesPage {
             productName.add(element.getText());
         }
         return productName;
+    }
+
+    public List<String> getProductPrice(int[] numberProduct) {
+        List<WebElement> productsPrice = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(productPriceLocator)));
+        wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(productsPrice.get(0), "formatMoneyAnim")));
+        List<String> productPrice= new ArrayList<>();
+        for (int i : numberProduct) {
+            productPrice.add(productsPrice.get(i).getText().replaceAll("₽", ""));
+        }
+        return productPrice;
     }
 }
