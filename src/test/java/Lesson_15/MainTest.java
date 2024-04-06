@@ -2,10 +2,12 @@ package Lesson_15;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pageEntity.WildberriesBaskedPage;
 
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainTest extends BaseTest {
@@ -20,8 +22,9 @@ public class MainTest extends BaseTest {
         wildberriesPage.addToBasket(numberProduct);
         List<String> productsName = wildberriesPage.getProductName(numberProduct);
         List<String> productsPrice = wildberriesPage.getProductPrice(numberProduct);
-        wildberriesPage.goToBasket();
-
+        WildberriesBaskedPage wildberriesBaskedPage = wildberriesPage.goToBasket();
+        assertEquals(wildberriesBaskedPage.numberProduct().size(), numberProduct.length);
+        assertEquals(productsName,wildberriesBaskedPage.getProductName());
         Thread.sleep(20000);
     }
 }
