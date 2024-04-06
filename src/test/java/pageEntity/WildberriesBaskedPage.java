@@ -28,7 +28,7 @@ public class WildberriesBaskedPage extends WildberriesPage {
         List<WebElement> productsName = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(productNameLocator)));
         List<String> productName= new ArrayList<>();
         for (WebElement element : productsName) {
-            productName.add(element.getText());
+            productName.add(element.getText().replaceAll("[.\\s]", ""));
         }
         return productName;
     }

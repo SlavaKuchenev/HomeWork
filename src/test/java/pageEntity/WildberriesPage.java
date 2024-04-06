@@ -66,7 +66,7 @@ public class WildberriesPage {
         List<WebElement> productsName = driver.findElements(productNameLocator);
         List<String> productName= new ArrayList<>();
         for (int i : numberProduct) {
-            productName.add(productsName.get(i).getText().replaceAll("/", ""));
+            productName.add(productsName.get(i).getText().replaceAll("[./\\s]", ""));
         }
         return productName;
     }
