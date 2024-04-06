@@ -9,24 +9,25 @@ import java.util.List;
 
 public class WildberriesBaskedPage extends WildberriesPage {
 
-    By numberProductLocator= By.xpath("//div[@class='list-item__good']");
-    By numberOneProductLocator= By.xpath("//input[@type= 'number']");
-    By productNameLocator= By.xpath("//div[@class='list-item__good']//span[@class='good-info__good-name']");
-    By productPriceLocator= By.xpath("//div[@class='list-item__price-wallet']");
-    By productPriceSumLocator= By.xpath("//span[@class= 'b-right']");
+    By numberProductLocator = By.xpath("//div[@class='list-item__good']");
+    By numberOneProductLocator = By.xpath("//input[@type= 'number']");
+    By productNameLocator = By.xpath("//div[@class='list-item__good']//span[@class='good-info__good-name']");
+    By productPriceLocator = By.xpath("//div[@class='list-item__price-wallet']");
+
 
 
     public WildberriesBaskedPage(WebDriver driver) {
         super(driver);
     }
 
-    public List<WebElement> numberProduct(){
+    public List<WebElement> numberProduct() {
         return driver.findElements(numberProductLocator);
     }
+
     public List<String> getProductName() {
 
         List<WebElement> productsName = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(productNameLocator)));
-        List<String> productName= new ArrayList<>();
+        List<String> productName = new ArrayList<>();
         for (WebElement element : productsName) {
             productName.add(element.getText().replaceAll("[.\\s]", ""));
         }
@@ -36,17 +37,11 @@ public class WildberriesBaskedPage extends WildberriesPage {
     public int getProductPriceSum() {
         List<WebElement> productsPrice = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(productPriceLocator)));
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(productsPrice.get(0), "formatMoneyAnim")));
-        int productPrice= 0;
+        int productPrice = 0;
         for (WebElement element : productsPrice) {
             productPrice += Integer.parseInt(element.getText().replaceAll("[₽\\s]", ""));
         }
         return productPrice;
-    }
-
-    public int getProductPriceAll() {
-        WebElement productsPrice = wait.until(ExpectedConditions.visibilityOf(driver.findElement(productPriceSumLocator)));
-        wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(productsPrice, "formatMoneyAnim")));
-        return Integer.parseInt(productsPrice.getText().replaceAll("[₽\\s]", ""));
     }
 
     public List<Integer> numberOneProductLocator() {

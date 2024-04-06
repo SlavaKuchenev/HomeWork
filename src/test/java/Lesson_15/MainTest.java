@@ -1,6 +1,6 @@
 package Lesson_15;
 
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 import pageEntity.WildberriesBaskedPage;
 
@@ -11,14 +11,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest extends BaseTest {
-    @BeforeEach
-    void initPageObject() throws InterruptedException {
-
-    }
 
     @Test
     public void testAddingToCartAndChecking() throws InterruptedException {
-        int[] numberProduct = {0,3,5};
+        int[] numberProduct = {0, 3, 5};
         wildberriesPage.addToBasket(numberProduct);
         List<String> productsName = wildberriesPage.getProductName(numberProduct);
         int productPriceSum = wildberriesPage.getProductPriceSum(numberProduct);
@@ -29,10 +25,11 @@ public class MainTest extends BaseTest {
         assertEquals(wildberriesBaskedPage.numberProduct().size(), numberProduct.length);
         Thread.sleep(3000);
         assertEquals(productPriceSum, wildberriesBaskedPage.getProductPriceSum());
-        assertEquals(productsName,productsNameBasket);
+        assertEquals(productsName, productsNameBasket);
         assertEquals(productPriceSum, wildberriesBaskedPage.getProductPriceSum());
-        for(int i : wildberriesBaskedPage.numberOneProductLocator()){
-            assertTrue(i == 1);
+        for (int i : wildberriesBaskedPage.numberOneProductLocator()) {
+            assertEquals(1, i);
         }
+
     }
 }
