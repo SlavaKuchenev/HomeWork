@@ -33,6 +33,6 @@ public class MainTest extends BaseTest {
         assertEquals(productPriceSum, wildberriesBaskedPage.getProductPriceSum());
         for(int i : wildberriesBaskedPage.numberOneProductLocator()){
             assertTrue(i == 1);
-        }    ;
+        }
     }
 }
