@@ -30,6 +30,5 @@ public class MainTest extends BaseTest {
         for (int i : wildberriesBaskedPage.numberOneProductLocator()) {
             assertEquals(1, i);
         }
-
     }
 }

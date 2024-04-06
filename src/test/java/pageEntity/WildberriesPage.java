@@ -20,14 +20,11 @@ public class WildberriesPage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(3));
     }
 
-
     By productCardLocator = By.xpath("//div[@class='product-card__wrapper']");
-
     By buttonAddToBasketLocator = By.xpath("//div[@class='product-card__wrapper']//a[@class='product-card__add-basket j-add-to-basket btn-main']");
     By buttonToBasketLocator = By.xpath("//div[@class='navbar-pc__item j-item-basket']/a");
     By productNameLocator = By.xpath("//div[@class='product-card__wrapper']//span[@class='product-card__name']");
     By productPriceLocator = By.xpath("//div[@class='product-card__wrapper']//ins");
-
     By popupListSizeLocator = By.xpath("//div[@class='popup popup-list-of-sizes shown slideUp']");
 
     By popupListSizeLabelLocator = By.xpath("//li");
@@ -51,10 +48,11 @@ public class WildberriesPage {
             return false;
         }
     }
+
     public int getProductPriceSum(int[] numberProduct) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(productCardLocator));
         List<WebElement> productsPrice = driver.findElements(productPriceLocator);
-        int productPrice= 0;
+        int productPrice = 0;
         for (int i : numberProduct) {
             productPrice += Integer.parseInt(productsPrice.get(i).getText().replaceAll("[₽\\s]", ""));
         }
@@ -64,16 +62,15 @@ public class WildberriesPage {
     public List<String> getProductName(int[] numberProduct) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(productCardLocator));
         List<WebElement> productsName = driver.findElements(productNameLocator);
-        List<String> productName= new ArrayList<>();
+        List<String> productName = new ArrayList<>();
         for (int i : numberProduct) {
             productName.add(productsName.get(i).getText().replaceAll("[./\\s]", ""));
         }
         return productName;
     }
+
     public WildberriesBaskedPage goToBasket() {
         driver.findElement(buttonToBasketLocator).click();
-        return new  WildberriesBaskedPage(driver);
+        return new WildberriesBaskedPage(driver);
     }
-
-
 }
