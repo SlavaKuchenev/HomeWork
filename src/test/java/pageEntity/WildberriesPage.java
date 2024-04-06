@@ -26,7 +26,6 @@ public class WildberriesPage {
     By productNameLocator = By.xpath("//div[@class='product-card__wrapper']//span[@class='product-card__name']");
     By productPriceLocator = By.xpath("//div[@class='product-card__wrapper']//ins");
     By popupListSizeLocator = By.xpath("//div[@class='popup popup-list-of-sizes shown slideUp']");
-
     By popupListSizeLabelLocator = By.xpath("//li");
 
     public void addToBasket(int[] numberProduct) {
