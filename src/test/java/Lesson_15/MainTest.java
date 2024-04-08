@@ -1,20 +1,32 @@
 package Lesson_15;
 
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import pageEntity.WildberriesBaskedPage;
 
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest extends BaseTest {
+    private static Collection<Object[]> testData() {
+        return Arrays.asList(new Object[][]{
+                {new int[]{0, 3, 5}},
+                {new int[]{1, 2, 4}}
+        });
+    }
 
-    @Test
-    public void testAddingToCartAndChecking() throws InterruptedException {
-        int[] numberProduct = {0, 3, 5};
+
+    @ParameterizedTest
+    @MethodSource("testData")
+    @DisplayName("Проверка добовления товара в корзину")
+    public void testAddingToCartAndChecking(int[] numberProduct) throws InterruptedException {
         wildberriesPage.addToBasket(numberProduct);
         List<String> productsName = wildberriesPage.getProductName(numberProduct);
         List<Integer> productPriceList = wildberriesPage.getProductPriceSum(numberProduct);
