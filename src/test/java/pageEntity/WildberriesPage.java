@@ -1,7 +1,6 @@
 package pageEntity;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,6 +27,7 @@ public class WildberriesPage {
     By productPriceLocator = By.xpath("//div[@class='product-card__wrapper']//ins");
     By popupListSizeLocator = By.xpath("//div[@class='popup popup-list-of-sizes shown slideUp']");
     By popupListSizeLabelLocator = By.xpath("//li");
+    By buttonToOkayCookiesLocator = By.xpath("//button[text()='Окей']");
 
     public void addToBasket(int[] numberProduct) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(productCardLocator));
@@ -51,10 +51,19 @@ public class WildberriesPage {
 
     public List<Integer> getProductPriceSum(int[] numberProduct) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(productCardLocator));
+
         List<WebElement> productsPrice = driver.findElements(productPriceLocator);
         List<Integer> productPriceList = new ArrayList<>();
+
         for (int i : numberProduct) {
-            productPriceList.add(Integer.parseInt(productsPrice.get(i).getText().replaceAll("[₽\\s]", "")));
+            boolean priceChange = true;
+            while (priceChange) {
+                int price = Integer.parseInt(wait.until(ExpectedConditions.visibilityOf(productsPrice.get(i))).getText().replaceAll("[₽\\s]", ""));
+                if (price == Integer.parseInt(wait.until(ExpectedConditions.visibilityOf(productsPrice.get(i))).getText().replaceAll("[₽\\s]", ""))) {
+                    priceChange = false;
+                    productPriceList.add(Integer.parseInt(productsPrice.get(i).getText().replaceAll("[₽\\s]", "")));
+                }
+            }
         }
         return productPriceList;
     }
@@ -64,7 +73,7 @@ public class WildberriesPage {
         List<WebElement> productsName = driver.findElements(productNameLocator);
         List<String> productName = new ArrayList<>();
         for (int i : numberProduct) {
-            productName.add(productsName.get(i).getText().replaceAll("[./\\s]", ""));
+            productName.add(productsName.get(i).getText().replaceAll("[OIMC./\\s]", ""));
         }
         return productName;
     }
@@ -72,5 +81,10 @@ public class WildberriesPage {
     public WildberriesBaskedPage goToBasket() {
         driver.findElement(buttonToBasketLocator).click();
         return new WildberriesBaskedPage(driver);
+    }
+
+    public void clickButtonOkay() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(productCardLocator));
+        driver.findElement(buttonToOkayCookiesLocator).click();
     }
 }

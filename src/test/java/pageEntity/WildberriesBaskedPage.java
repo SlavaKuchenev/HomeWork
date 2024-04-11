@@ -30,7 +30,7 @@ public class WildberriesBaskedPage extends WildberriesPage {
         List<WebElement> productsName = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(productNameLocator)));
         List<String> productName = new ArrayList<>();
         for (WebElement element : productsName) {
-            productName.add(element.getText().replaceAll("[/.\\s]", ""));
+            productName.add(element.getText().replaceAll("[OIMC/.\\s]", ""));
         }
         return productName;
     }
@@ -40,7 +40,14 @@ public class WildberriesBaskedPage extends WildberriesPage {
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(productsPrice.get(0), "formatMoneyAnim")));
         List<Integer> productPriceList = new ArrayList<>();
         for (WebElement element : productsPrice) {
-            productPriceList.add(Integer.parseInt(element.getText().replaceAll("[₽\\s]", "")));
+            boolean priceChange = true;
+            while (priceChange) {
+                int price = Integer.parseInt(wait.until(ExpectedConditions.visibilityOf(element)).getText().replaceAll("[₽\\s]", ""));
+                if (price == Integer.parseInt(wait.until(ExpectedConditions.visibilityOf(element)).getText().replaceAll("[₽\\s]", ""))) {
+                    priceChange = false;
+                    productPriceList.add(Integer.parseInt(element.getText().replaceAll("[₽\\s]", "")));
+                }
+            }
         }
         return productPriceList;
     }

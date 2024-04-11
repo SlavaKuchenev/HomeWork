@@ -18,7 +18,7 @@ public class MainTest extends BaseTest {
     private static Collection<Object[]> testData() {
         return Arrays.asList(new Object[][]{
                 {new int[]{0, 3, 5}},
-                {new int[]{1, 2, 4}}
+                {new int[]{1, 2, 4}},
         });
     }
 
@@ -26,7 +26,8 @@ public class MainTest extends BaseTest {
     @ParameterizedTest
     @MethodSource("testData")
     @DisplayName("Проверка добовления товара в корзину")
-    public void testAddingToCartAndChecking(int[] numberProduct) throws InterruptedException {
+    public void testAddingToCartAndChecking(int[] numberProduct) {
+        wildberriesPage.clickButtonOkay();
         wildberriesPage.addToBasket(numberProduct);
         List<String> productsName = wildberriesPage.getProductName(numberProduct);
         List<Integer> productPriceList = wildberriesPage.getProductPriceSum(numberProduct);
@@ -35,7 +36,6 @@ public class MainTest extends BaseTest {
         Collections.sort(productsName);
         Collections.sort(productsNameBasket);
         assertEquals(wildberriesBaskedPage.numberProduct().size(), numberProduct.length);
-        Thread.sleep(3000);
         assertEquals(productsName, productsNameBasket);
         List<Integer> productPriceBaskedList = wildberriesBaskedPage.getProductPrice();
         Collections.sort(productPriceList);
