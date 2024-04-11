@@ -1,6 +1,7 @@
 package pageEntity;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -26,16 +27,19 @@ public class WildberriesPage {
     By productNameLocator = By.xpath("//div[@class='product-card__wrapper']//span[@class='product-card__name']");
     By productPriceLocator = By.xpath("//div[@class='product-card__wrapper']//ins");
     By popupListSizeLocator = By.xpath("//div[@class='popup popup-list-of-sizes shown slideUp']");
-    By popupListSizeLabelLocator = By.xpath("//li");
+    By popupListSizeLabelLocator = By.xpath(".//li");
     By buttonToOkayCookiesLocator = By.xpath("//button[text()='Окей']");
 
     public void addToBasket(int[] numberProduct) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(productCardLocator));
         List<WebElement> productsButton = driver.findElements(buttonAddToBasketLocator);
         for (int i : numberProduct) {
+            scrollToElement(driver,productsButton.get(i));
             wait.until(ExpectedConditions.visibilityOf(productsButton.get(i))).click();
             if (isPopupListSizeDisplayed()) {
-                driver.findElement(popupListSizeLocator).findElements(popupListSizeLabelLocator).get(0).click();
+                List<WebElement> listSizeLabel = driver.findElement(popupListSizeLocator).findElements(popupListSizeLabelLocator);
+                int sizeLabelIndex = listSizeLabel.size()/2;
+                listSizeLabel.get(sizeLabelIndex).click();
             }
         }
     }
@@ -57,6 +61,7 @@ public class WildberriesPage {
 
         for (int i : numberProduct) {
             boolean priceChange = true;
+            scrollToElement(driver,productsPrice.get(i));
             while (priceChange) {
                 int price = Integer.parseInt(wait.until(ExpectedConditions.visibilityOf(productsPrice.get(i))).getText().replaceAll("[₽\\s]", ""));
                 if (price == Integer.parseInt(wait.until(ExpectedConditions.visibilityOf(productsPrice.get(i))).getText().replaceAll("[₽\\s]", ""))) {
@@ -73,12 +78,14 @@ public class WildberriesPage {
         List<WebElement> productsName = driver.findElements(productNameLocator);
         List<String> productName = new ArrayList<>();
         for (int i : numberProduct) {
+            scrollToElement(driver,productsName.get(i));
             productName.add(productsName.get(i).getText().replaceAll("[OIMC./\\s]", ""));
         }
         return productName;
     }
 
     public WildberriesBaskedPage goToBasket() {
+        scrollToElement(driver, driver.findElement(buttonToBasketLocator));
         driver.findElement(buttonToBasketLocator).click();
         return new WildberriesBaskedPage(driver);
     }
@@ -86,5 +93,9 @@ public class WildberriesPage {
     public void clickButtonOkay() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(productCardLocator));
         driver.findElement(buttonToOkayCookiesLocator).click();
+    }
+    public static void scrollToElement(WebDriver driver, WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(false);", element);
     }
 }

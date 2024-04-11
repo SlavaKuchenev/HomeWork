@@ -26,7 +26,6 @@ public class WildberriesBaskedPage extends WildberriesPage {
     }
 
     public List<String> getProductName() {
-
         List<WebElement> productsName = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(productNameLocator)));
         List<String> productName = new ArrayList<>();
         for (WebElement element : productsName) {
@@ -35,10 +34,11 @@ public class WildberriesBaskedPage extends WildberriesPage {
         return productName;
     }
 
-    public List<Integer> getProductPrice() {
+    public List<Integer> getProductPrice() throws InterruptedException {
         List<WebElement> productsPrice = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(productPriceLocator)));
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(productsPrice.get(0), "formatMoneyAnim")));
         List<Integer> productPriceList = new ArrayList<>();
+        Thread.sleep(1000);
         for (WebElement element : productsPrice) {
             boolean priceChange = true;
             while (priceChange) {
