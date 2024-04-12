@@ -22,16 +22,14 @@ public class Pixel6Pro {
     }
 
     public void enteringNumber(double number) {
-        char[] digits = String.valueOf(convertToNumberIfDecimalIsZero(number)).toCharArray();
-        for (char digit : digits) {
-            if (digit != '.' && digit != '-') {
-                clickNumber(digit);
+        String numberString = String.valueOf(convertToNumberIfDecimalIsZero(number));
+        for (char digit : numberString.toCharArray()) {
+            if (digit == '.') {
+                clickPoint();
+            } else if (digit == '-') {
+                clickMinus();
             } else {
-                if (digit == '.') {
-                    clickPoint();
-                } else {
-                    clickMinus();
-                }
+                clickNumber(digit);
             }
         }
     }
