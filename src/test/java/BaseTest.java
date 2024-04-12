@@ -18,7 +18,6 @@ public class BaseTest {
     @BeforeTest
     public void setup() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        //capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 8 Pro API 30");
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.google.android.calculator");
         capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "com.android.calculator2.Calculator");

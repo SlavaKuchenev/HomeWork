@@ -14,6 +14,7 @@ public class Pixel6Pro {
     By pointLocator = By.xpath("//android.widget.ImageButton[@content-desc='point']");
     By textViewLocator = By.className("android.widget.TextView");
     By equalsLocator = By.xpath("//android.widget.ImageButton[@content-desc='equals']");
+    By clearLocator = By.xpath("//android.widget.ImageButton[@content-desc='clear']");
 
 
     public Pixel6Pro(AppiumDriver<AndroidElement> driver) {
@@ -21,12 +22,16 @@ public class Pixel6Pro {
     }
 
     public void enteringNumber(double number) {
-        char[] digits = String.valueOf(number).toCharArray();
+        char[] digits = String.valueOf(convertToNumberIfDecimalIsZero(number)).toCharArray();
         for (char digit : digits) {
-            if (digit != '.') {
+            if (digit != '.' && digit != '-') {
                 clickNumber(digit);
             } else {
-                clickPoint();
+                if (digit == '.') {
+                    clickPoint();
+                } else {
+                    clickMinus();
+                }
             }
         }
     }
@@ -46,7 +51,30 @@ public class Pixel6Pro {
     public String valueOnScreen() {
         return driver.findElement(textViewLocator).getText();
     }
+
     public void clickEquals() {
         driver.findElement(equalsLocator).click();
+    }
+
+    public void clickMinus() {
+        driver.findElement(minusLocator).click();
+    }
+    public void clickclear() {
+        driver.findElement(clearLocator).click();
+    }
+
+    public Number convertToNumberIfDecimalIsZero(double number) {
+        String numberAsString = String.valueOf(number);
+        int indexOfDot = numberAsString.indexOf('.');
+
+        if (indexOfDot != -1 && indexOfDot == numberAsString.length() - 2 && numberAsString.charAt(indexOfDot + 1) == '0') {
+            numberAsString = numberAsString.substring(0, indexOfDot);
+            if (numberAsString.startsWith("-")) {
+                return Double.parseDouble(numberAsString);
+            } else {
+                return Integer.parseInt(numberAsString);
+            }
+        }
+        return number;
     }
 }
