@@ -1,6 +1,7 @@
 package pageEntity;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
@@ -39,6 +40,8 @@ public class WildberriesBaskedPage extends WildberriesPage {
         wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(productsPrice.get(0), "formatMoneyAnim")));
         List<Integer> productPriceList = new ArrayList<>();
         Thread.sleep(1000);
+        wait.until((ExpectedCondition<Boolean>) webDriver ->
+                ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
         for (WebElement element : productsPrice) {
             boolean priceChange = true;
             while (priceChange) {
@@ -78,5 +81,10 @@ public class WildberriesBaskedPage extends WildberriesPage {
             numberOneProductList.add(value);
         }
         return numberOneProductList;
+    }
+
+    public String getDocumentReadyState(WebDriver driver) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        return (String) jsExecutor.executeScript("return document.readyState;");
     }
 }
