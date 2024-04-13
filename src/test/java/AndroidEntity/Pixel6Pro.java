@@ -57,6 +57,15 @@ public class Pixel6Pro {
     public void clickMinus() {
         driver.findElement(minusLocator).click();
     }
+
+    public void clickMultiply() {
+        driver.findElement(multiplyLocator).click();
+    }
+
+    public void clickDivide() {
+        driver.findElement(divideLocator).click();
+    }
+
     public void clickclear() {
         driver.findElement(clearLocator).click();
     }

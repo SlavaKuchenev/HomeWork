@@ -17,13 +17,77 @@ public class MainTest extends BaseTest {
 
     @Test(dataProvider = "TestSumData")
     @Description("Проверка сложения")
-    public void sumTest(double number1, double number2, String expectedSum){
+    public void sumTest(double number1, double number2, String expectedSum) {
         pixel6Pro.clickclear();
         pixel6Pro.enteringNumber(number1);
         pixel6Pro.clickPlus();
         pixel6Pro.enteringNumber(number2);
         pixel6Pro.clickEquals();
-        Assert.assertEquals(pixel6Pro.valueOnScreen(),expectedSum);
+        Assert.assertEquals(pixel6Pro.valueOnScreen(), expectedSum);
+    }
+
+    @DataProvider(name = "TestMinusData")
+    public Object[][] testMinusData() {
+        return new Object[][]{
+                {2, 3, "−1"},
+                {-123.45, 3, "−126.45"},
+                {0, -15, "−15"},
+                {2.1, 1.5, "0.6"}
+        };
+    }
+
+    @Test(dataProvider = "TestMinusData")
+    @Description("Проверка вычитания")
+    public void minusTest(double number1, double number2, String expectedSum) {
+        pixel6Pro.clickclear();
+        pixel6Pro.enteringNumber(number1);
+        pixel6Pro.clickMinus();
+        pixel6Pro.enteringNumber(number2);
+        pixel6Pro.clickEquals();
+        Assert.assertEquals(pixel6Pro.valueOnScreen(), expectedSum);
+    }
+
+    @DataProvider(name = "TestMultiplyData")
+    public Object[][] testMultiplyData() {
+        return new Object[][]{
+                {2, 3, "6"},
+                {-123.45, 3, "−370.35"},
+                {0, -15, "0"},
+                {-2.1, -1.5, "3.15"}
+        };
+    }
+
+    @Test(dataProvider = "TestMultiplyData")
+    @Description("Проверка умножения")
+    public void multiplyTest(double number1, double number2, String expectedSum) {
+        pixel6Pro.clickclear();
+        pixel6Pro.enteringNumber(number1);
+        pixel6Pro.clickMultiply();
+        pixel6Pro.enteringNumber(number2);
+        pixel6Pro.clickEquals();
+        Assert.assertEquals(pixel6Pro.valueOnScreen(), expectedSum);
+    }
+
+    @DataProvider(name = "TestDivideData")
+    public Object[][] testDivideData() {
+        return new Object[][]{
+                {2, 3, "0.6666666666666"},
+                {-123.45, 3, "−41.15"},
+                {0, -15, "0"},
+                {-2.1, -1.5, "1.4"},
+                {-2.1, 0, "Can't divide by 0"}
+        };
+    }
+
+    @Test(dataProvider = "TestDivideData")
+    @Description("Проверка умножения")
+    public void divideTest(double number1, double number2, String expectedSum) {
+        pixel6Pro.clickclear();
+        pixel6Pro.enteringNumber(number1);
+        pixel6Pro.clickDivide();
+        pixel6Pro.enteringNumber(number2);
+        pixel6Pro.clickEquals();
+        Assert.assertEquals(pixel6Pro.valueOnScreen(), expectedSum);
     }
 }
 
