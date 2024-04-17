@@ -15,7 +15,6 @@ public class Pixel6Pro {
     By textViewLocator = By.className("android.widget.TextView");
     By equalsLocator = By.xpath("//android.widget.ImageButton[@content-desc='equals']");
     By clearLocator = By.xpath("//android.widget.ImageButton[@content-desc='clear']");
-    By calculatorLocator = By.xpath("//android.widget.TextView[@content-desc=\"Calculator\"]");
 
 
     public Pixel6Pro(AppiumDriver<AndroidElement> driver) {
