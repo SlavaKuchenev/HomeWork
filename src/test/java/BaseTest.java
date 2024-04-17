@@ -9,15 +9,18 @@ import org.testng.annotations.BeforeTest;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 public class BaseTest {
     protected AppiumDriver<AndroidElement> driver;
     protected Pixel6Pro pixel6Pro;
+    protected String sessionUUID;
 
     @BeforeTest
     public void setup() {
+        sessionUUID = UUID.randomUUID().toString();
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.google.android.calculator");
@@ -36,3 +39,4 @@ public class BaseTest {
         }
     }
 }
+
