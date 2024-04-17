@@ -1,3 +1,5 @@
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import jdk.jfr.Description;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -16,6 +18,8 @@ public class MainTest extends BaseTest {
     }
 
     @Test(dataProvider = "TestSumData")
+    @Feature("Калькулятор")
+    @Story("Проверка сложения")
     @Description("Проверка сложения")
     public void sumTest(double number1, double number2, String expectedSum) {
         pixel6Pro.clickclear();
@@ -37,6 +41,8 @@ public class MainTest extends BaseTest {
     }
 
     @Test(dataProvider = "TestMinusData")
+    @Feature("Калькулятор")
+    @Story("Проверка вычитания")
     @Description("Проверка вычитания")
     public void minusTest(double number1, double number2, String expectedSum) {
         pixel6Pro.clickclear();
@@ -58,6 +64,8 @@ public class MainTest extends BaseTest {
     }
 
     @Test(dataProvider = "TestMultiplyData")
+    @Feature("Калькулятор")
+    @Story("Проверка умножения")
     @Description("Проверка умножения")
     public void multiplyTest(double number1, double number2, String expectedSum) {
         pixel6Pro.clickclear();
@@ -80,7 +88,9 @@ public class MainTest extends BaseTest {
     }
 
     @Test(dataProvider = "TestDivideData")
-    @Description("Проверка умножения")
+    @Feature("Калькулятор")
+    @Story("Проверка деления")
+    @Description("Проверка деления")
     public void divideTest(double number1, double number2, String expectedSum) {
         pixel6Pro.clickclear();
         pixel6Pro.enteringNumber(number1);
